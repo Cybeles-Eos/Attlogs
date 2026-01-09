@@ -9,7 +9,7 @@
     <h1>Login Your Account</h1>
     <a href="signin.php">create account</a>
     <form method="POST" action="login.php">
-        <input type="email" name="email" placeholder="Email" required autocomplete="off">
+        <input type="text" name="email" placeholder="Email" required autocomplete="off">
         <input type="password" name="password" placeholder="Password" required autocomplete="new-password">
         <button type="submit">Login</button>
     </form>
@@ -20,7 +20,7 @@
 <?php
 session_start();
 include("./database/database.php");
-
+include("./controller/request.php");
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
@@ -35,20 +35,17 @@ if (empty($_POST['email']) || empty($_POST['password'])) {
 $email = trim($_POST['email']);
 $pass  = $_POST['password'];
 
+
 // Get user
-$sql = "SELECT id, name, password FROM users WHERE email = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $email);
-$stmt->execute();
+use findUser\Request;
+$getUser = new Request($conn, $email);
+$user = $getUser->getUser();
 
-$result = $stmt->get_result();
-
-if ($result->num_rows === 0) {
+// If User Don't Exist
+if (!$user) {
     header("Location: login.php?error=Invalid email or password");
     exit();
 }
-
-$user = $result->fetch_assoc();
 
 // Verify password
 if (!password_verify($pass, $user['password'])) {
@@ -59,6 +56,12 @@ if (!password_verify($pass, $user['password'])) {
 // Login success
 $_SESSION['user_id'] = $user['id'];
 $_SESSION['user_name'] = $user['name'];
+$_SESSION['role'] = $user['role'];  
+
+if($_SESSION['role'] == 'admin'){
+    header("Location: admin/dashboard.php");
+    exit;
+}
 
 header("Location: pages/user-dashboard.php");
 exit();

@@ -19,6 +19,28 @@
             return false;
          }
       }
+      
+
+      // Get Enrollment Status Message : LEFT JOIN
+      public function getAllesm() {
+         $sql = "
+            SELECT 
+               u.id,
+               u.name,
+               u.email,
+               u.role,
+               u.is_enrolled,
+               s.message
+            FROM users u
+            LEFT JOIN enrollment_status s
+               ON u.is_enrolled = s.id
+         ";
+
+         $stmt = $this->database->prepare($sql);
+         $stmt->execute();
+         return $stmt->get_result();
+      }
+
    }
 
 

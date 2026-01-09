@@ -11,7 +11,7 @@
 
    // Get all users from database.
    $data = new GetAllQuery($conn);
-   $result = $data->getAllQuery();
+   $result = $data->getAllesm();
    if (!$result) die("Error fetching users.");
 
 ?>
@@ -41,20 +41,27 @@
                     <th style="border:1px solid #ccc; padding:8px;">ID</th>
                     <th style="border:1px solid #ccc; padding:8px;">Name</th>
                     <th style="border:1px solid #ccc; padding:8px;">Email</th>
+                    <th style="border:1px solid #ccc; padding:8px;">Enroll Status</th>
                     <th style="border:1px solid #ccc; padding:8px;">Role</th>
                 </tr>
             </thead>
             <tbody>
                 <?php 
                     while($query = $result->fetch_assoc()){
-                        echo "
-                            <tr>
-                                <td style='border:1px solid #ccc; padding:8px;'>{$query['id']}</td>
-                                <td style='border:1px solid #ccc; padding:8px;'>{$query['name']}</td>
-                                <td style='border:1px solid #ccc; padding:8px;'>{$query['email']}</td>
-                                <td style='border:1px solid #ccc; padding:8px;'>{$query['role']}</td>
-                            </tr>
-                        ";
+
+                        if($query['role'] !== 'admin'){
+                            // $enrolledText = ($query['is_enrolled'] == 1) ? 'Yes' : 'User Not ';
+                            echo "
+                                <tr>
+                                    <td style='border:1px solid #ccc; padding:8px;'>{$query['id']}</td>
+                                    <td style='border:1px solid #ccc; padding:8px;'>{$query['name']}</td>
+                                    <td style='border:1px solid #ccc; padding:8px;'>{$query['email']}</td>
+                                    <td style='border:1px solid #ccc; padding:8px;'>{$query['message']}</td>
+                                    <td style='border:1px solid #ccc; padding:8px;'>{$query['role']}</td>
+                                </tr>
+                            ";
+                        }
+
                     }
                 ?>
 

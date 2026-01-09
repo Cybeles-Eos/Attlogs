@@ -18,3 +18,22 @@ CREATE TABLE users (
 ALTER TABLE users
 ADD role VARCHAR(50) DEFAULT 'user';
 ```
+
+## Create Another Column In User Table
+```sql
+ALTER TABLE users
+ADD is_enrolled TINYINT(1) NOT NULL DEFAULT 0;
+```
+
+## Create a enrollment status for LEFT JOIN performing
+## Left Join: Get data in enrollment_status
+```sql
+CREATE TABLE enrollment_status (
+    id TINYINT(1) PRIMARY KEY,
+    message VARCHAR(100) NOT NULL
+);
+
+INSERT INTO enrollment_status (id, message) VALUES
+(1, 'Welcome Back'),
+(0, 'Not Enrolled');
+```

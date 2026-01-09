@@ -19,7 +19,7 @@ session_start();
     <title>Users Dashboard</title>
 </head>
 <body>
-    <h1><?= $nameId ?>World <?= $name ?></h1>
+    <h1>ID:<?= $nameId ?> <br>Name: <?= $name ?></h1>
     <a href="../logout.php">Logout</a>
 </body>
 </html>

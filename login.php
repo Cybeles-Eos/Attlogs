@@ -27,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     return;
 }
 
+//Email Pass Check
 if (empty($_POST['email']) || empty($_POST['password'])) {
     header("Location: login.php?error=All fields are required");
     exit();

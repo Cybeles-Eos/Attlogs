@@ -23,3 +23,9 @@ Follow these steps to get the application up and running locally:
     - Open Xammp Create new database name "attlogs"
     - Import Our Database SQL File inside database folder 
     ```
+
+4. Access Our Attlog in localhost
+
+   ```
+   http://localhost/attendance-book/login.php
+   ```

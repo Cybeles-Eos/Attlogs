@@ -13,13 +13,13 @@ CREATE TABLE users (
 );
 ```
 
-## Create Another Column In User Table
+## Create Another Column In User Table: role
 ```sql
 ALTER TABLE users
 ADD role VARCHAR(50) DEFAULT 'user';
 ```
 
-## Create Another Column In User Table
+## Create Another Column In User Table: is_enrolled
 ```sql
 ALTER TABLE users
 ADD is_enrolled TINYINT(1) NOT NULL DEFAULT 0;
@@ -36,4 +36,19 @@ CREATE TABLE enrollment_status (
 INSERT INTO enrollment_status (id, message) VALUES
 (1, 'Welcome Back'),
 (0, 'Not Enrolled');
+```
+
+## Created Table: attendance_status
+```sql
+CREATE TABLE attendance_status (
+    id TINYINT(1) PRIMARY KEY,
+    message VARCHAR(100) NOT NULL
+);
+
+INSERT INTO attendance_status (id, message) VALUES
+(1, 'Present'),
+(0, 'Absent');
+
+ALTER TABLE users
+ADD is_in TINYINT(1) NOT NULL DEFAULT 0;
 ```

@@ -57,7 +57,9 @@ if (!password_verify($pass, $user['password'])) {
 // Login success
 $_SESSION['user_id'] = $user['id'];
 $_SESSION['user_name'] = $user['name'];
-$_SESSION['role'] = $user['role'];  
+$_SESSION['role'] = $user['role']; 
+$_SESSION['is_in'] = $user['is_in'];  
+$_SESSION['is_enrolled'] = $user['is_enrolled'];  
 
 if($_SESSION['role'] == 'admin'){
     header("Location: admin/dashboard.php");

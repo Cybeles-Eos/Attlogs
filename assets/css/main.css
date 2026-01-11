@@ -1,0 +1,19 @@
+body{
+  font-family: "DM Sans", sans-serif;
+
+}
+
+.reset-box{
+    max-width: 65   0px;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: rgba(255, 0, 0, 0.10);
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 2rem;
+
+}
+.reset-box p{
+    font-size: 14px;        
+}

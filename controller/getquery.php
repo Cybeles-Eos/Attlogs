@@ -41,6 +41,28 @@
          return $stmt->get_result();
       }
 
+      // Get Attendance Status Message : LEFT JOIN
+      public function getAllPresent() {
+         $sql = "
+            SELECT 
+               u.id,
+               u.name,
+               u.email,
+               u.role,
+               u.is_enrolled,
+               u.is_in,
+               u.time_in,
+               u.time_out,
+               s.message
+            FROM users u
+            LEFT JOIN attendance_status s
+               ON u.is_in = s.id
+         ";
+
+         $stmt = $this->database->prepare($sql);
+         $stmt->execute();
+         return $stmt->get_result();
+      }
    }
 
 

@@ -3,16 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Make User</title>
+    <title>Sign-in</title>
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <script src="./assets/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+    <script src="./assets/js/jquery.js"></script>
+    <script src="./assets/js/jquery-ui.min.js"></script>
+    <script src="./assets/js/jquery.validate.min.js"></script>
 </head>
-<body>
-    <form method="POST" action="signin.php">
-        <input type="text" name="name" placeholder="Full Name" required autocomplete="off">
-        <input type="email" name="email" placeholder="Email" required autocomplete="off">
-        <input type="password" name="password" placeholder="Password" required autocomplete="new-password">
-        <input type="password" name="conf_password" placeholder="Confirm Password" required>
-        <button type="submit">Sign Up</button>
-    </form>
+<body class="d-flex align-items-center py-4" style="height: 100vh;">
+    <main class="form-signin m-auto" style="width: 400px;"> 
+        <form method="POST" action="signin.php"> 
+            <!-- <img class="mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">  -->
+            <h1 class="h4 mb-3 fw-normal">Crate Your Account</h1> 
+            <div class="form-floating mb-2"> 
+                <input type="text" name="name" class="form-control" id="floatingInput" placeholder="Juan Dela Cruz" required autocomplete="off"> 
+                <label for="floatingInput">Full Name</label> 
+            </div> 
+            <div class="form-floating mb-2"> 
+                <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" required autocomplete="off"> 
+                <label for="floatingInput">Email address</label> 
+            </div> 
+            <div class="form-floating mb-2"> 
+                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" required autocomplete="new-password"> 
+                <label for="floatingPassword">Password</label> 
+            </div> 
+            <div class="form-floating mb-2"> 
+                <input type="password" name="conf_password" class="form-control" id="floatingPassword" placeholder="Password" required autocomplete="new-password"> 
+                <label for="floatingPassword">Confirm Password</label> 
+            </div> 
+            <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button> 
+            <div class="form-check p-0 text-start mt-3 mb-5"> 
+                <p>Already have account?  <a href="signin.php">Login now</a></p>
+            </div> 
+            <p class="mt-5 mb-3 text-body-secondary text-center">© 2017–2025</p> 
+        </form> 
+    </main>
 </body>
 </html>
 

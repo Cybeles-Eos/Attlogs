@@ -41,8 +41,11 @@
 <body>
 
     <main style="max-width: 900px; margin: 0 auto;">
-        <h1 class="mt-5">Admin</h1>
-        <a href="../logout.php">Logout</a>
+        <div class="mt-5 d-flex justify-content-between align-items-center">
+            <h1 class="">Admin</h1>
+            <a href="../logout.php" class="btn btn-danger">Logout</a>
+        </div>
+
         <br><br>
         <div class="d-flex justify-content-end align-items-center py-3">
             <!-- <p class="me-2 mb-0" style="line-height: 100%;">Sort By: </p> -->

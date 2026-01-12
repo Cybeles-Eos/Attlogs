@@ -34,9 +34,9 @@
             </div> 
             <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button> 
             <div class="form-check p-0 text-start mt-3 mb-5"> 
-                <p>Already have account?  <a href="signin.php">Login now</a></p>
+                <p>Already have account?  <a href="login.php">Login now</a></p>
             </div> 
-            <p class="mt-5 mb-3 text-body-secondary text-center">© 2017–2025</p> 
+            <p class="mt-5 mb-3 text-body-secondary text-center">Team Daniii ♥</p> 
         </form> 
     </main>
 </body>

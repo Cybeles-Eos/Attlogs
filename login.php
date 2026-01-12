@@ -29,7 +29,7 @@
             <div class="form-check p-0 pb-4 text-start mt-3 mb-5"> 
                 <p >Don't have account?  <a href="signin.php">Create now</a></p>
             </div> 
-            <p class="mt-5 mb-3 text-body-secondary text-center">© 2017–2025</p> 
+            <p class="mt-5 mb-3 text-body-secondary text-center">Team Daniii ♥</p> 
         </form> 
     </main>
 </body>

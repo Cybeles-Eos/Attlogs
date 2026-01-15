@@ -14,7 +14,11 @@ $userId = (int) $_SESSION['user_id']; // trust session, not POST
 
 // Get current time (12-hour format)
 date_default_timezone_set('Asia/Manila');
-$timeOut = date("h:i A");
+
+$time = date("h:i A");
+$date = date("M j Y");
+
+$timeOut = $time . ", " . $date;
 
 // Update is_in AND time_in
 $sql = "UPDATE users SET is_in = 2, time_out = ? WHERE id = ? AND is_in = 1";

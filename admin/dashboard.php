@@ -13,7 +13,7 @@
    $data = new GetAllQuery($conn);
    $result = $data->getAllesm();
    if (!$result) die("Error fetching users.");
-   
+
    $attendanceData = new GetAllQuery($conn);
    $presents = $attendanceData->getAllPresent();
    if (!$presents) die("Error fetching users.");
@@ -39,15 +39,13 @@
     <title>Admin</title>
 </head>
 <body>
-
-    <main style="max-width: 900px; margin: 0 auto;">
-        <div class="mt-5 d-flex justify-content-between align-items-center">
-            <h1 class="">Admin</h1>
-            <a href="../logout.php" class="btn btn-danger">Logout</a>
-        </div>
-
-        <br><br>
-        <div class="d-flex justify-content-end align-items-center py-3">
+<div class="admin-bar">
+    <h1 class="">Admin</h1>
+    <a href="../logout.php" class="btn btn-danger btn-sm">Logout</a>
+</div>
+    <main style="max-width: 900px; margin: 0 auto; padding-inline: 1rem">
+        <br>
+        <div class="d-flex justify-content-center align-items-center py-3">
             <!-- <p class="me-2 mb-0" style="line-height: 100%;">Sort By: </p> -->
             <div class="btn-group" role="group" aria-label="Attendance filter">
                 <input type="radio" class="btn-check" name="logFilter" id="filterAll" autocomplete="off" checked>
@@ -60,7 +58,7 @@
                 <label class="btn btn-outline-primary" for="filterNotTimeIn" style="font-size: 15px;"><i class="fa fa-cog me-1 mt-1"></i>Actions</label>
             </div>
         </div>
-
+        <br>
         <div id="allrecords">
             <p style="color: #0000006d; font-weight: 500">All Records</p>
             <table style="border-collapse: collapse; width:100%;">
@@ -71,6 +69,7 @@
                         <th style="border:1px solid #ccc; padding:8px;">Email</th>
                         <th style="border:1px solid #ccc; padding:8px;">Enroll Status</th>
                         <th style="border:1px solid #ccc; padding:8px;">Role</th>
+                        <th style="border:1px solid #ccc; padding:8px;">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -81,11 +80,24 @@
                                 // $enrolledText = ($query['is_enrolled'] == 1) ? 'Yes' : 'User Not ';
                                 echo "
                                     <tr>
-                                        <td style='border:1px solid #ccc; padding:8px;'>{$query['id']}</td>
-                                        <td style='border:1px solid #ccc; padding:8px;'>{$query['name']}</td>
-                                        <td style='border:1px solid #ccc; padding:8px;'>{$query['email']}</td>
-                                        <td style='border:1px solid #ccc; padding:8px;'>{$query['message']}</td>
-                                        <td style='border:1px solid #ccc; padding:8px;'>{$query['role']}</td>
+                                        <td style=''>{$query['id']}</td>
+                                        <td style=''>{$query['name']}</td>
+                                        <td style=''>{$query['email']}</td>
+                                        <td style=''>{$query['message']}</td>
+                                        <td style=''>{$query['role']}</td>
+                                        <td style=''>
+                                            <button class='btn btn-danger btn-sm delete-user' data-useraid='{$query['id']}'>Delete</button>
+                                            <button class='btn btn-primary btn-sm view-user' 
+                                                data-id='{$query['id']}' 
+                                                data-name='{$query['name']}' 
+                                                data-email='{$query['email']}' 
+                                                data-message='{$query['message']}' 
+                                                data-role='{$query['role']}'
+                                                data-bs-toggle='modal' 
+                                                data-bs-target='#exampleModal'>
+                                                View
+                                            </button>
+                                        </td>
                                     </tr>
                                 ";
                             }
@@ -140,6 +152,20 @@
             </div>
         </div>
 
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Details</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <script>
@@ -183,6 +209,43 @@
                     }
                 });
 
+            });
+
+            
+            $(document).on("click", ".view-user", function () {
+                const id = $(this).data("id");
+                const name = $(this).data("name");
+                const email = $(this).data("email");
+                const message = $(this).data("message");
+                const role = $(this).data("role");
+
+                const modalContent = `
+                    <p><b>ID: </b>${id}</p>
+                    <p><b>Name: </b>${name}</p>
+                    <p><b>Email: </b>${email}</p>
+                    <p><b>Enroll Status: </b>${message}</p>
+                    <p><b>Role: </b>${role}</p>
+                `;
+                $(".modal-body").html(modalContent);
+            });
+            $(document).on("click", ".delete-user", function () {
+                if (!confirm("Are you sure you want to delete this user?")) return;
+
+                const userIda = $(this).data("useraid");
+                
+                $.ajax({
+                    url: "../controller/delete_user.php",
+                    type: "POST",
+                    data: { user_id: userIda },
+                    success: function (response) {
+                        if (response === "success") {
+                            alert("User has been deleted");
+                            location.reload();
+                        } else {
+                            alert(response);
+                        }
+                    }
+                });
             });
         });
     </script>
